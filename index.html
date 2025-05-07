@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rii Intro</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+
+    <style>
+      body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #5f8a95 0%, #a0c4c7 100%);
+        overflow-x: hidden;
+      }
+
+      .floating-bg {
+        position: absolute;
+        top: -100px;
+        left: -100px;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+        animation: float 20s infinite ease-in-out;
+        z-index: 0;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50% { transform: translateY(20px) translateX(30px); }
+      }
+
+      nav li:hover {
+        transform: scale(1.1);
+      }
+
+      button:hover {
+        transform: scale(1.05);
+      }
+
+      main:hover .main-content {
+        transform: translateY(-5px);
+      }
+
+      @media (max-width: 640px) {
+        footer {
+          flex-direction: column;
+          text-align: center;
+          gap: 0.5rem;
+        }
+      }
+
+      /* Optional: Sembunyikan scrollbar untuk tampilan bersih */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+  <body class="m-0 p-0 relative overflow-x-hidden">
+    
+    <!-- Background Bubble -->
+    <div class="floating-bg"></div>
+
+    <div class="min-h-screen flex flex-col relative z-10">
+      <!-- Navigation -->
+      <nav class="bg-[#4f7a80] text-white text-lg font-indieflower font-semibold select-none shadow-md">
+        <div class="overflow-x-auto scrollbar-hide">
+          <ul class="flex flex-nowrap whitespace-nowrap justify-start space-x-6 py-3 px-4 tracking-wide transition-all duration-300">
+            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Game</li>
+            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Fotografi</li>
+            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Anime</li>
+            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Traveling</li>
+            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Film |</li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main class="flex flex-col lg:flex-row flex-wrap bg-white rounded-3xl shadow-2xl overflow-hidden max-w-7xl mx-4 lg:mx-auto my-10 transition-transform duration-500 main-content" data-aos="fade-up">
+        <!-- Left image -->
+        <div class="w-full lg:w-[400px] relative group">
+          <img src="images/Rii..jpg" alt="Profile Pic" class="w-full h-80 lg:h-full object-cover transform transition-transform duration-500 group-hover:scale-105 rounded-t-3xl lg:rounded-tl-3xl lg:rounded-bl-3xl"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-t-3xl lg:rounded-tl-3xl lg:rounded-bl-3xl"></div>
+        </div>
+
+        <!-- Right text and button -->
+        <div class="flex flex-col items-center lg:items-start justify-center p-6 lg:pl-16 lg:pr-12 flex-1 text-center lg:text-left">
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1a1a1a] leading-tight max-w-xl drop-shadow-md mb-2" data-aos="fade-down">
+            Hello, I’m <span class="text-[#4f7a80]">Rii</span>
+          </h1>
+          <p class="text-gray-600 text-md sm:text-lg max-w-md mt-2 mb-4" data-aos="fade-up" data-aos-delay="100">
+            Explorer of dreams 🌙, coffee-powered soul ☕, and anime believer 🎥.
+          </p>
+          
+          <a href="profile.html" data-aos="zoom-in" data-aos-delay="200">
+            <button class="mt-4 bg-[#5f8a95] hover:bg-[#4f7a80] text-white text-lg sm:text-2xl font-semibold rounded-2xl px-8 py-3 w-max shadow-xl transition-all duration-300 hover:shadow-2xl">
+              Get Started
+            </button>
+          </a>
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="bg-[#4f7a80] text-white text-xl font-indieflower flex flex-wrap items-center justify-center space-x-6 py-4 select-none shadow-inner z-10">
+        <div class="flex items-center space-x-3 hover:text-[#d1e7e0] cursor-pointer transition-colors duration-300">
+          <i class="fab fa-instagram text-3xl"></i>
+          <span>@f.r.amrii</span>
+        </div>
+        <span class="hidden sm:inline">|</span>
+        <div class="flex items-center space-x-3 hover:text-[#d1e7e0] cursor-pointer transition-colors duration-300">
+          <i class="fas fa-phone-alt text-3xl"></i>
+          <span>0812-2551-3080</span>
+        </div>
+        <span class="hidden sm:inline">|</span>
+      </footer>
+    </div>
+
+    <script>
+      AOS.init({
+        duration: 1000,
+        once: true,
+      });
+    </script>
+  </body>
+</html>
