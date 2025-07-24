@@ -8,127 +8,398 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Poppins:wght@300;600&display=swap" rel="stylesheet"/>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
 
     <style>
+      * {
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, #5f8a95 0%, #a0c4c7 100%);
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        margin: 0;
+        padding: 0;
         overflow-x: hidden;
+        min-height: 100vh;
       }
 
       .floating-bg {
-        position: absolute;
-        top: -100px;
-        left: -100px;
-        width: 500px;
-        height: 500px;
-        background: rgba(255, 255, 255, 0.05);
+        position: fixed;
+        top: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%);
         border-radius: 50%;
-        animation: float 20s infinite ease-in-out;
+        animation: float 25s infinite ease-in-out;
+        z-index: 0;
+      }
+
+      .floating-bg-2 {
+        position: fixed;
+        bottom: -250px;
+        left: -250px;
+        width: 700px;
+        height: 700px;
+        background: radial-gradient(circle, rgba(147, 51, 234, 0.05) 0%, transparent 70%);
+        border-radius: 50%;
+        animation: float 30s infinite ease-in-out reverse;
         z-index: 0;
       }
 
       @keyframes float {
-        0%, 100% { transform: translateY(0) translateX(0); }
-        50% { transform: translateY(20px) translateX(30px); }
-      }
-
-      nav li:hover {
-        transform: scale(1.1);
-      }
-
-      button:hover {
-        transform: scale(1.05);
-      }
-
-      main:hover .main-content {
-        transform: translateY(-5px);
-      }
-
-      @media (max-width: 640px) {
-        footer {
-          flex-direction: column;
-          text-align: center;
-          gap: 0.5rem;
+        0%, 100% { 
+          transform: translateY(0) translateX(0) rotate(0deg); 
+        }
+        50% { 
+          transform: translateY(-20px) translateX(15px) rotate(90deg); 
         }
       }
 
-      /* Optional: Sembunyikan scrollbar untuk tampilan bersih */
+      .glassmorphism {
+        background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.85) 100%);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .main-card {
+        background: rgba(15, 23, 42, 0.8);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(148, 163, 184, 0.15);
+      }
+
+      .title-gradient {
+        background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .nav-item {
+        position: relative;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+      }
+
+      .nav-item::before {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #60a5fa, #a78bfa);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+
+      .nav-item:hover {
+        color: #f1f5f9;
+        background: rgba(59, 130, 246, 0.15);
+        transform: translateY(-1px);
+      }
+
+      .nav-item:hover::before {
+        width: 80%;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-primary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+      }
+
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
+        letter-spacing: 0.025em;
+      }
+
+      .social-link {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.75rem;
+        cursor: pointer;
+      }
+
+      .social-link:hover {
+        background: rgba(148, 163, 184, 0.1);
+        transform: translateY(-1px);
+        color: #60a5fa;
+      }
+
+      .social-link i {
+        transition: transform 0.3s ease;
+      }
+
+      .social-link:hover i {
+        transform: scale(1.1);
+      }
+
+      .tag-skill {
+        background: rgba(59, 130, 246, 0.15);
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        color: #93c5fd;
+        transition: all 0.3s ease;
+      }
+
+      .tag-skill:hover {
+        background: rgba(59, 130, 246, 0.25);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+      }
+
+      .image-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 1rem 0 0 1rem;
+      }
+
+      .image-container img {
+        transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .image-container:hover img {
+        transform: scale(1.05);
+      }
+
+      .image-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1));
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .image-container:hover .image-overlay {
+        opacity: 1;
+      }
+
+      @media (max-width: 1024px) {
+        .image-container {
+          border-radius: 1rem 1rem 0 0;
+        }
+      }
+
+      @media (max-width: 640px) {
+        .floating-bg, .floating-bg-2 {
+          display: none;
+        }
+        
+        .nav-item {
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+      }
+
       .scrollbar-hide::-webkit-scrollbar {
         display: none;
       }
+      
       .scrollbar-hide {
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
     </style>
   </head>
-  <body class="m-0 p-0 relative overflow-x-hidden">
-    
-    <!-- Background Bubble -->
+  
+  <body>
+    <!-- Background Elements -->
     <div class="floating-bg"></div>
+    <div class="floating-bg-2"></div>
 
     <div class="min-h-screen flex flex-col relative z-10">
       <!-- Navigation -->
-      <nav class="bg-[#4f7a80] text-white text-lg font-indieflower font-semibold select-none shadow-md">
-        <div class="overflow-x-auto scrollbar-hide">
-          <ul class="flex flex-nowrap whitespace-nowrap justify-start space-x-6 py-3 px-4 tracking-wide transition-all duration-300">
-            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Game</li>
-            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Fotografi</li>
-            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Anime</li>
-            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Traveling</li>
-            <li class="hover:text-[#d1e7e0] cursor-pointer transition-all duration-300">| Film |</li>
-          </ul>
+      <nav class="glassmorphism shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div class="overflow-x-auto scrollbar-hide">
+            <ul class="flex space-x-2 py-4 justify-center lg:justify-start min-w-max">
+              <li class="nav-item text-slate-200 font-medium text-sm lg:text-base">Photography</li>
+              <li class="nav-item text-slate-200 font-medium text-sm lg:text-base">Gaming</li>
+              <li class="nav-item text-slate-200 font-medium text-sm lg:text-base">Travel</li>
+              <li class="nav-item text-slate-200 font-medium text-sm lg:text-base">Cinema</li>
+              <li class="nav-item text-slate-200 font-medium text-sm lg:text-base">Portfolio</li>
+            </ul>
+          </div>
         </div>
       </nav>
 
-      <!-- Main content -->
-      <main class="flex flex-col lg:flex-row flex-wrap bg-white rounded-3xl shadow-2xl overflow-hidden max-w-7xl mx-4 lg:mx-auto my-10 transition-transform duration-500 main-content" data-aos="fade-up">
-        <!-- Left image -->
-        <div class="w-full lg:w-[400px] relative group">
-          <img src="images/Rii..jpg" alt="Profile Pic" class="w-full h-80 lg:h-full object-cover transform transition-transform duration-500 group-hover:scale-105 rounded-t-3xl lg:rounded-tl-3xl lg:rounded-bl-3xl"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-60 transition-opacity duration-500 rounded-t-3xl lg:rounded-tl-3xl lg:rounded-bl-3xl"></div>
-        </div>
+      <!-- Main Content -->
+      <main class="flex-1 flex items-center justify-center px-4 py-8 lg:py-16">
+        <div class="main-card rounded-2xl shadow-2xl overflow-hidden max-w-5xl w-full transition-all duration-500 hover:shadow-3xl" data-aos="fade-up" data-aos-duration="1000">
+          <div class="flex flex-col lg:flex-row min-h-[500px]">
+            
+            <!-- Image Section -->
+            <div class="w-full lg:w-5/12 image-container">
+              <img 
+                src="images/Rii..jpg" 
+                alt="Rii's Portrait" 
+                class="w-full h-80 lg:h-full object-cover object-center"
+              />
+              <div class="image-overlay"></div>
+            </div>
 
-        <!-- Right text and button -->
-        <div class="flex flex-col items-center lg:items-start justify-center p-6 lg:pl-16 lg:pr-12 flex-1 text-center lg:text-left">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1a1a1a] leading-tight max-w-xl drop-shadow-md mb-2" data-aos="fade-down">
-            Hello, I’m <span class="text-[#4f7a80]">Rii</span>
-          </h1>
-          <p class="text-gray-600 text-md sm:text-lg max-w-md mt-2 mb-4" data-aos="fade-up" data-aos-delay="100">
-            Explorer of dreams 🌙, coffee-powered soul ☕, and anime believer 🎥.
-          </p>
-          
-          <a href="profile.html" data-aos="zoom-in" data-aos-delay="200">
-            <button class="mt-4 bg-[#5f8a95] hover:bg-[#4f7a80] text-white text-lg sm:text-2xl font-semibold rounded-2xl px-8 py-3 w-max shadow-xl transition-all duration-300 hover:shadow-2xl">
-              Get Started
-            </button>
-          </a>
+            <!-- Content Section -->
+            <div class="flex-1 flex flex-col justify-center px-6 py-8 lg:px-12 lg:py-16">
+              <div class="space-y-8 text-center lg:text-left">
+                
+                <!-- Title -->
+                <div data-aos="fade-down" data-aos-delay="200">
+                  <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-white" style="font-family: 'Playfair Display', serif;">
+                    Hello, I'm <span class="title-gradient">Rii</span>
+                  </h1>
+                </div>
+                
+                <!-- Description -->
+                <div data-aos="fade-up" data-aos-delay="400">
+                  <p class="text-slate-300 text-lg lg:text-xl leading-relaxed max-w-lg mx-auto lg:mx-0">
+                    Creative explorer passionate about capturing moments through photography, immersive gaming experiences, and discovering new horizons through travel.
+                  </p>
+                </div>
+                
+                <!-- Skills Tags -->
+                <div class="flex flex-wrap gap-3 justify-center lg:justify-start" data-aos="fade-up" data-aos-delay="600">
+                  <span class="tag-skill px-4 py-2 rounded-full text-sm font-medium">
+                    📸 Photography
+                  </span>
+                  <span class="tag-skill px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(147, 51, 234, 0.15); border-color: rgba(147, 51, 234, 0.3); color: #c4b5fd;">
+                    🎮 Gaming
+                  </span>
+                  <span class="tag-skill px-4 py-2 rounded-full text-sm font-medium" style="background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); color: #6ee7b7;">
+                    ✈️ Travel
+                  </span>
+                </div>
+                
+                <!-- CTA Button -->
+                <div data-aos="zoom-in" data-aos-delay="800">
+                  <a href="profile.html">
+                    <button class="btn-primary text-white text-lg font-semibold rounded-xl px-8 py-4 shadow-xl inline-flex items-center space-x-2">
+                      <span>Discover More</span>
+                      <i class="fas fa-arrow-right transition-transform duration-300"></i>
+                    </button>
+                  </a>
+                </div>
+                
+              </div>
+            </div>
+            
+          </div>
         </div>
       </main>
 
       <!-- Footer -->
-      <footer class="bg-[#4f7a80] text-white text-xl font-indieflower flex flex-wrap items-center justify-center space-x-6 py-4 select-none shadow-inner z-10">
-        <div class="flex items-center space-x-3 hover:text-[#d1e7e0] cursor-pointer transition-colors duration-300">
-          <i class="fab fa-instagram text-3xl"></i>
-          <span>@f.r.amrii</span>
+      <footer class="glassmorphism border-t border-slate-700/30 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+            
+            <div class="social-link flex items-center space-x-3 text-slate-300">
+              <i class="fab fa-instagram text-xl"></i>
+              <span class="font-medium">@f.r.amrii</span>
+            </div>
+            
+            <div class="hidden sm:block w-px h-6 bg-slate-600"></div>
+            
+            <div class="social-link flex items-center space-x-3 text-slate-300">
+              <i class="fas fa-phone-alt text-xl"></i>
+              <span class="font-medium">0812-2551-3080</span>
+            </div>
+            
+          </div>
         </div>
-        <span class="hidden sm:inline">|</span>
-        <div class="flex items-center space-x-3 hover:text-[#d1e7e0] cursor-pointer transition-colors duration-300">
-          <i class="fas fa-phone-alt text-3xl"></i>
-          <span>0812-2551-3080</span>
-        </div>
-        <span class="hidden sm:inline">|</span>
       </footer>
+      
     </div>
 
     <script>
+      // Initialize AOS
       AOS.init({
-        duration: 1000,
+        duration: 1200,
         once: true,
+        easing: 'ease-out-cubic',
+        offset: 120,
+        anchorPlacement: 'top-bottom'
       });
+
+      // Enhanced interactions
+      document.addEventListener('DOMContentLoaded', function() {
+        // Smooth scroll behavior
+        document.documentElement.style.scrollBehavior = 'smooth';
+        
+        // Add loading animation
+        document.body.style.opacity = '0';
+        document.body.style.transition = 'opacity 0.5s ease';
+        
+        window.addEventListener('load', function() {
+          document.body.style.opacity = '1';
+        });
+        
+        // Enhanced button interaction
+        const button = document.querySelector('.btn-primary');
+        if (button) {
+          button.addEventListener('click', function(e) {
+            // Add ripple effect
+            const ripple = document.createElement('div');
+            const rect = this.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = e.clientX - rect.left - size / 2;
+            const y = e.clientY - rect.top - size / 2;
+            
+            ripple.style.cssText = `
+              position: absolute;
+              width: ${size}px;
+              height: ${size}px;
+              left: ${x}px;
+              top: ${y}px;
+              background: rgba(255, 255, 255, 0.3);
+              border-radius: 50%;
+              transform: scale(0);
+              animation: ripple 0.6s ease-out;
+              pointer-events: none;
+            `;
+            
+            this.appendChild(ripple);
+            
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          });
+        }
+      });
+      
+      // Add ripple animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes ripple {
+          to {
+            transform: scale(2);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
     </script>
   </body>
 </html>

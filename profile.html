@@ -3,58 +3,71 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Rii's Profile</title>
+    <title>Portofolio Rii.</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
 
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
       body {
-        font-family: 'Indie Flower', cursive;
-        background: linear-gradient(to right, #232526, #414345);
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 25%, #16213e 50%, #0f3460 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
         transition: all 0.3s ease-in-out;
       }
 
       body.light-mode {
-        background: linear-gradient(to right, #e0eafc, #cfdef3);
-        color: #1f2937;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 25%, #cbd5e1 50%, #94a3b8 100%);
+        color: #1e293b;
       }
 
       .light-mode .card {
-        background: rgba(255, 255, 255, 0.8);
-        color: #1f2937;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1e293b;
+        border: 1px solid rgba(0, 0, 0, 0.05);
       }
 
       .light-mode .text-white {
-        color: #1f2937 !important;
+        color: #1e293b !important;
       }
 
       .light-mode .text-gray-300,
       .light-mode .text-gray-100,
       .light-mode .text-gray-400 {
-        color: #4b5563 !important;
+        color: #64748b !important;
       }
 
       .light-mode .bg-gray-600 {
-        background-color: #d1d5db !important;
+        background-color: #e2e8f0 !important;
       }
 
-      .light-mode footer {
-        color: #6b7280 !important;
+      .light-mode .accent-color {
+        color: #2563eb !important;
+      }
+
+      .light-mode .accent-bg {
+        background-color: #2563eb !important;
       }
 
       .card {
-        background: rgba(255, 255, 255, 0.07);
-        backdrop-filter: blur(10px);
-        border-radius: 1.5rem;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(20px);
+        border-radius: 2rem;
         border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
       }
 
       .skill-bar {
-        transition: width 1s ease-in-out;
+        transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-origin: left;
       }
 
       .no-scrollbar::-webkit-scrollbar {
@@ -65,139 +78,489 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
+
+      .accent-color {
+        color: #00d4aa;
+      }
+
+      .accent-bg {
+        background-color: #00d4aa;
+      }
+
+      .floating-shapes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(45deg, #00d4aa, #00a3ff);
+        opacity: 0.1;
+        animation: float 20s infinite ease-in-out;
+      }
+
+      .shape:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .shape:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        top: 60%;
+        right: 15%;
+        animation-delay: -5s;
+      }
+
+      .shape:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        bottom: 20%;
+        left: 20%;
+        animation-delay: -10s;
+      }
+
+      .shape:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        top: 40%;
+        right: 40%;
+        animation-delay: -15s;
+      }
+
+      @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        33% { transform: translateY(-30px) rotate(120deg); }
+        66% { transform: translateY(20px) rotate(240deg); }
+      }
+
+      .profile-img {
+        transition: all 0.5s ease;
+        filter: grayscale(20%);
+      }
+
+      .profile-img:hover {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+      }
+
+      .social-link {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .social-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .social-link:hover::before {
+        left: 100%;
+      }
+
+      .gallery-item {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: pointer;
+        flex-shrink: 0;
+      }
+
+      .gallery-item:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 20px 40px rgba(0, 212, 170, 0.3);
+      }
+
+      .gallery-container {
+        position: relative;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 100%;
+        padding: 10px 0;
+      }
+
+      .gallery-container::-webkit-scrollbar {
+        height: 8px;
+      }
+
+      .gallery-container::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+      }
+
+      .gallery-container::-webkit-scrollbar-thumb {
+        background: linear-gradient(90deg, #00d4aa, #00a3ff);
+        border-radius: 10px;
+      }
+
+      .gallery-container::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(90deg, #00a3ff, #00d4aa);
+      }
+
+      .gallery-track {
+        display: flex;
+        gap: 1rem;
+        width: max-content;
+        padding: 0 20px;
+      }
+
+      .gallery-item img {
+        width: 160px;
+        height: 284px; /* 9:16 aspect ratio */
+        object-fit: cover;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.05);
+        box-shadow: 0 15px 30px rgba(0, 212, 170, 0.4);
+      }
+
+      .theme-toggle {
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+        box-shadow: 0 10px 20px rgba(0, 212, 170, 0.3);
+      }
+
+      .typing-effect {
+        border-right: 2px solid #00d4aa;
+        animation: blink 1s infinite;
+      }
+
+      @keyframes blink {
+        0%, 50% { border-color: #00d4aa; }
+        51%, 100% { border-color: transparent; }
+      }
     </style>
   </head>
 
   <body class="min-h-screen flex flex-col items-center justify-start py-10 px-4 text-white relative">
-    <!-- Decorative Shapes -->
-    <div class="absolute top-10 left-10 w-40 h-40 bg-[#63c6b0] opacity-20 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-20 right-20 w-28 h-28 bg-[#63c6b0] opacity-20 rounded-full blur-xl"></div>
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
 
-    <!-- Light/Dark Toggle -->
-    <button id="themeToggle" onclick="toggleTheme()" class="fixed top-4 right-4 text-white bg-[#63c6b0] px-4 py-2 rounded-full shadow-lg z-50">🌞</button>
+    <!-- Theme Toggle -->
+    <button id="themeToggle" onclick="toggleTheme()" class="theme-toggle fixed top-6 right-6 text-white accent-bg px-5 py-3 rounded-full shadow-xl z-50 font-medium">
+      <i class="fas fa-sun"></i>
+    </button>
 
-    <!-- Optional: Music Backsound -->
-    <audio autoplay loop hidden>
-      <source src="your-music.mp3" type="audio/mpeg" />
-    </audio>
+    <!-- Header Section -->
+    <div class="text-center mb-12" data-aos="fade-down">
+      <h1 class="text-6xl font-bold mb-4 bg-gradient-to-r from-[#00d4aa] to-[#00a3ff] bg-clip-text text-transparent">
+        Welcome to My World
+      </h1>
+      <p class="text-xl text-gray-300 italic typing-effect" id="typewriter">
+        "Stay curious, stay creative, stay awesome"
+      </p>
+    </div>
 
-    <h1 class="text-5xl font-bold mb-6 drop-shadow-lg text-[#63c6b0]" data-aos="fade-down">Welcome to My World 🌍</h1>
-    <p class="text-xl text-[#63c6b0] italic mb-8" data-aos="fade-up">"Stay low-key, work high-key, win silently."</p>
-
-    <div class="card max-w-5xl w-full p-8 shadow-2xl text-white" data-aos="zoom-in">
+    <div class="card max-w-6xl w-full p-10 shadow-2xl text-white" data-aos="zoom-in">
       <!-- Profile Section -->
-      <div class="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-10">
-        <img src="images/Rii1.jpg" alt="Profile Pic" class="w-40 h-40 object-cover rounded-full shadow-lg"/>
+      <div class="flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-12">
+        <div class="flex-shrink-0">
+          <img src="images/Rii1.jpg" alt="Fakhrudin Rifki Amri" class="profile-img w-48 h-48 object-cover rounded-3xl shadow-2xl border-4 border-[#00d4aa]"/>
+        </div>
 
-        <div>
-          <h2 class="text-4xl font-semibold text-white">Fakhrudin Rifki Amri</h2>
-          <p class="text-lg text-gray-300 mt-2">
-            I'm a curious soul who loves 
-            <span class="text-[#63c6b0] font-semibold">gaming, photography, anime</span>, and wandering the world 🌏
+        <div class="flex-1 text-center lg:text-left">
+          <h2 class="text-5xl font-bold text-white mb-3">Fakhrudin Rifki Amri</h2>
+          <p class="text-xl text-[#00d4aa] font-semibold mb-4">Information Technology Student</p>
+          <p class="text-lg text-gray-300 leading-relaxed mb-6">
+            Just a regular student who happens to love photography, enjoys coding, and gets way too competitive in games. 
+            Always curious about how things work and love learning new stuff.
           </p>
-          <div class="mt-4 text-gray-300 space-y-1">
-            <p><strong>Email:</strong> rifkiirii593@email.com</p>
-            <p><strong>Phone:</strong> 0812-2551-3080</p>
-            <p><strong>Location:</strong> Somewhere Between Fantasy & Reality</p>
-            <div class="flex space-x-4 text-2xl text-[#63c6b0] mt-2">
-              <a href="https://github.com/Rii02/" target="_blank" class="hover:text-white transition"><i class="fab fa-github"></i></a>
-              <a href="https://www.instagram.com/f.r.amrii?igsh=bnpnOG84OW1jYzZ2" target="_blank" class="hover:text-white transition"><i class="fab fa-instagram"></i></a>
+          
+          <div class="space-y-3 text-gray-300 mb-6">
+            <div class="flex items-center justify-center lg:justify-start space-x-3">
+              <i class="fas fa-envelope accent-color"></i>
+              <span>rifkiirii593@email.com</span>
             </div>
+            <div class="flex items-center justify-center lg:justify-start space-x-3">
+              <i class="fas fa-phone accent-color"></i>
+              <span>0812-2551-3080</span>
+            </div>
+            <div class="flex items-center justify-center lg:justify-start space-x-3">
+              <i class="fas fa-map-marker-alt accent-color"></i>
+              <span>Surabaya, Indonesia</span>
+            </div>
+          </div>
+          
+          <div class="flex justify-center lg:justify-start space-x-6">
+            <a href="https://github.com/Rii02/" target="_blank" class="social-link text-3xl accent-color hover:text-white transition p-3 rounded-full bg-white bg-opacity-10">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.instagram.com/f.r.amrii?igsh=bnpnOG84OW1jYzZ2" target="_blank" class="social-link text-3xl accent-color hover:text-white transition p-3 rounded-full bg-white bg-opacity-10">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="#" class="social-link text-3xl accent-color hover:text-white transition p-3 rounded-full bg-white bg-opacity-10">
+              <i class="fab fa-linkedin"></i>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- About Me -->
-      <div class="mt-10 text-gray-100" data-aos="fade-up">
-        <h3 class="text-3xl text-[#63c6b0] font-bold mb-2">About Me</h3>
-        <p class="leading-relaxed">
-          I'm currently a student at Universitas Negeri Surabaya majoring in Information Technology Education. 
-          But beyond the books and coding stuff, I'm a huge fan of photography — there's just something magical 
-          about freezing time in a frame. People say I’m that kind of person who never backs down: persistent, 
-          trustworthy, and wildly ambitious. Let’s just say I don’t do “halfway”.
-        </p>
+      <!-- About Section -->
+      <div class="mt-16 text-gray-100" data-aos="fade-up">
+        <h3 class="text-4xl accent-color font-bold mb-6 flex items-center">
+          <i class="fas fa-user-circle mr-4"></i>About Me
+        </h3>
+        <div class="text-lg leading-relaxed space-y-4">
+          <p>
+            So yeah, I'm just a regular student at Universitas Negeri Surabaya studying IT Education. 
+            Nothing too fancy, but I genuinely love what I do and always try to learn something new every day.
+          </p>
+          <p>
+            Photography is more like a hobby for me - I just enjoy capturing cool moments whenever I can. 
+            Coding is something I'm still learning but find pretty interesting, and gaming is where I get 
+            way too competitive and strategic sometimes. I'm basically that friend who never gives up on 
+            anything and always has your back.
+          </p>
+          <p>
+            People say I'm pretty reliable and maybe a bit too ambitious sometimes. 
+            My goal is just to get better at what I do and maybe create something cool that people actually find useful.
+          </p>
+        </div>
       </div>
 
-      <div class="mt-10 text-gray-100" data-aos="fade-up">
-        <h3 class="text-3xl text-[#63c6b0] font-bold mb-2">Pendidikan</h3>
-          <p class="mb-1"><strong>Universitas:</strong> Universitas Negeri Surabaya</p>
-          <p class="mb-1"><strong>Jurusan:</strong> Pendidikan Teknologi Informasi</p>
-          <p><strong>Angkatan:</strong> 2023</p>
+      <!-- Education Section -->
+      <div class="mt-16 text-gray-100" data-aos="fade-up">
+        <h3 class="text-4xl accent-color font-bold mb-6 flex items-center">
+          <i class="fas fa-graduation-cap mr-4"></i>Education
+        </h3>
+        <div class="bg-white bg-opacity-5 rounded-2xl p-6 border border-white border-opacity-10">
+          <div class="flex items-start space-x-4">
+            <div class="accent-bg w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0">
+              <i class="fas fa-university text-white text-xl"></i>
+            </div>
+            <div>
+              <h4 class="text-2xl font-semibold mb-2">Universitas Negeri Surabaya</h4>
+              <p class="text-xl accent-color font-medium">Information Technology Education</p>
+              <p class="text-gray-400 mt-1">Class of 2023 - Present</p>
+            </div>
+          </div>
+        </div>
       </div>
      
       <!-- Skills Section -->
-      <div class="mt-10" data-aos="fade-right">
-        <h3 class="text-3xl text-[#63c6b0] font-bold mb-4">My Powers (Skills)</h3>
-        <div class="space-y-4">
-          <div>
-            <p class="text-lg font-semibold">Photography 📸</p>
-            <div class="w-full h-4 bg-gray-600 rounded-full overflow-hidden">
-              <div class="h-full bg-[#63c6b0] w-[90%] skill-bar"></div>
+      <div class="mt-16" data-aos="fade-right">
+        <h3 class="text-4xl accent-color font-bold mb-8 flex items-center">
+          <i class="fas fa-code mr-4"></i>Skills & Expertise
+        </h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="space-y-6">
+            <div class="skill-item">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xl font-semibold flex items-center">
+                  <i class="fas fa-camera mr-3 accent-color"></i>Photography
+                </span>
+                <span class="text-lg font-bold accent-color">90%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-600 rounded-full overflow-hidden">
+                <div class="h-full accent-bg w-[90%] skill-bar rounded-full"></div>
+              </div>
+            </div>
+            
+            <div class="skill-item">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xl font-semibold flex items-center">
+                  <i class="fas fa-laptop-code mr-3 accent-color"></i>Programming
+                </span>
+                <span class="text-lg font-bold accent-color">75%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-600 rounded-full overflow-hidden">
+                <div class="h-full accent-bg w-[75%] skill-bar rounded-full"></div>
+              </div>
             </div>
           </div>
-          <div>
-            <p class="text-lg font-semibold">Coding 💻</p>
-            <div class="w-full h-4 bg-gray-600 rounded-full overflow-hidden">
-              <div class="h-full bg-[#63c6b0] w-[50%] skill-bar"></div>
+          
+          <div class="space-y-6">
+            <div class="skill-item">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xl font-semibold flex items-center">
+                  <i class="fas fa-gamepad mr-3 accent-color"></i>Gaming
+                </span>
+                <span class="text-lg font-bold accent-color">95%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-600 rounded-full overflow-hidden">
+                <div class="h-full accent-bg w-[95%] skill-bar rounded-full"></div>
+              </div>
             </div>
-          </div>
-          <div>
-            <p class="text-lg font-semibold">Gaming 🎮</p>
-            <div class="w-full h-4 bg-gray-600 rounded-full overflow-hidden">
-              <div class="h-full bg-[#63c6b0] w-[95%] skill-bar"></div>
-            </div>
-          </div>
-          <div>
-            <p class="text-lg font-semibold">Watching Anime 🧙</p>
-            <div class="w-full h-4 bg-gray-600 rounded-full overflow-hidden">
-              <div class="h-full bg-[#63c6b0] w-[100%] skill-bar"></div>
+            
+            <div class="skill-item">
+              <div class="flex justify-between items-center mb-3">
+                <span class="text-xl font-semibold flex items-center">
+                  <i class="fas fa-palette mr-3 accent-color"></i>Design
+                </span>
+                <span class="text-lg font-bold accent-color">70%</span>
+              </div>
+              <div class="w-full h-3 bg-gray-600 rounded-full overflow-hidden">
+                <div class="h-full accent-bg w-[80%] skill-bar rounded-full"></div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Gallery Section -->
-      <div class="mt-10" data-aos="fade-up" data-aos-delay="200">
-        <h3 class="text-3xl text-[#63c6b0] font-bold mb-4">Gallery</h3>
-        <div class="flex overflow-x-auto space-x-4 pb-4 no-scrollbar">
-          <img src="images/pro1.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 1" data-aos="flip-left" />
-          <img src="images/pro2.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 2" data-aos="flip-up" />
-          <img src="images/pro3.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 3" data-aos="flip-right" />
-          <img src="images/pro4.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 4" data-aos="zoom-in" />
-          <img src="images/pro5.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 1" data-aos="flip-left" />
-          <img src="images/pro6.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 2" data-aos="flip-up" />
-          <img src="images/pro7.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 3" data-aos="flip-right" />
-          <img src="images/pro8.png" class="rounded-xl shadow-md hover:scale-105 hover:rotate-1 transition min-w-[250px]" alt="Project 4" data-aos="zoom-in" />
+      <div class="mt-16" data-aos="fade-up">
+        <h3 class="text-4xl accent-color font-bold mb-8 flex items-center">
+          <i class="fas fa-images mr-4"></i>My Gallery
+        </h3>
+        <div class="gallery-container">
+          <div class="gallery-track" id="galleryTrack">
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro1.png" alt="Project 1" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro2.png" alt="Project 2" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro3.png" alt="Project 3" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro4.png" alt="Project 4" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro5.png" alt="Project 5" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro6.png" alt="Project 6" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro7.png" alt="Project 7" />
+            </div>
+            <div class="gallery-item" data-aos="zoom-in">
+              <img src="images/pro8.png" alt="Project 8" />
+            </div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Back Link -->
-    <a href="index.html" class="mt-8 text-[#63c6b0] underline hover:text-[#88e0cf] transition" data-aos="fade-up">← Back to Home</a>
+    <!-- Navigation -->
+    <a href="index.html" class="mt-12 accent-color text-lg font-semibold hover:text-white transition flex items-center space-x-2" data-aos="fade-up">
+      <i class="fas fa-arrow-left"></i>
+      <span>Back to Home</span>
+    </a>
 
     <!-- Footer -->
-    <footer class="mt-10 text-sm text-gray-400 text-center" data-aos="fade-up">
-      © 2025 Rii. All rights reserved.
+    <footer class="mt-16 text-center text-gray-400" data-aos="fade-up">
+      <div class="flex items-center justify-center space-x-4 mb-4">
+        <div class="w-12 h-px bg-gradient-to-r from-transparent to-[#00d4aa]"></div>
+        <i class="fas fa-code text-[#00d4aa]"></i>
+        <div class="w-12 h-px bg-gradient-to-l from-transparent to-[#00d4aa]"></div>
+      </div>
+      <p>© 2025 Fakhrudin Rifki Amri. Crafted with passion and code.</p>
     </footer>
 
-    <!-- AOS JS -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script>
       AOS.init({
-        duration: 1000,
+        duration: 1200,
         once: true,
+        offset: 100
       });
 
       function toggleTheme() {
         const body = document.body;
         const toggleBtn = document.getElementById('themeToggle');
         body.classList.toggle('light-mode');
+        
         if (body.classList.contains('light-mode')) {
-          toggleBtn.textContent = '🌙';
+          toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
         } else {
-          toggleBtn.textContent = '🌞';
+          toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
         }
       }
+
+      // Typewriter effect
+      const phrases = [
+        '"Stay curious, stay creative, stay awesome"',
+        '"Life is too short for boring code"',
+        '"Every photo has a story to tell"',
+        '"Dream big, code bigger"',
+        '"Learning never stops"'
+      ];
+      
+      let phraseIndex = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+      const typewriterElement = document.getElementById('typewriter');
+      
+      function typeWriter() {
+        const currentPhrase = phrases[phraseIndex];
+        
+        if (isDeleting) {
+          typewriterElement.textContent = currentPhrase.substring(0, charIndex - 1);
+          charIndex--;
+        } else {
+          typewriterElement.textContent = currentPhrase.substring(0, charIndex + 1);
+          charIndex++;
+        }
+        
+        let typeSpeed = isDeleting ? 50 : 100;
+        
+        if (!isDeleting && charIndex === currentPhrase.length) {
+          typeSpeed = 2000;
+          isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+          isDeleting = false;
+          phraseIndex = (phraseIndex + 1) % phrases.length;
+          typeSpeed = 500;
+        }
+        
+        setTimeout(typeWriter, typeSpeed);
+      }
+      
+      // Start typewriter effect after page loads
+      setTimeout(typeWriter, 1000);
+
+      // Animate skill bars when they come into view
+      const observerOptions = {
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const skillBars = entry.target.querySelectorAll('.skill-bar');
+            skillBars.forEach(bar => {
+              bar.style.width = bar.style.width || bar.getAttribute('class').match(/w-\[(\d+)%\]/)[1] + '%';
+            });
+          }
+        });
+      }, observerOptions);
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const skillsSection = document.querySelector('[data-aos="fade-right"]');
+        if (skillsSection) {
+          observer.observe(skillsSection);
+        }
+      });
     </script>
   </body>
 </html>
